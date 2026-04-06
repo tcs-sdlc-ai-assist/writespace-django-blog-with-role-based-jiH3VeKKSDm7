@@ -14,5 +14,10 @@
       "src": "/(.*)",
       "dest": "writespace/writespace/wsgi.py"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "writespace.settings"
+    }
+  }
 }
