@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Login - WriteSpace{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 px-4 py-12">
+    <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="{% url 'landing' %}" class="text-4xl font-extrabold text-white">WriteSpace</a>
+            <p class="mt-2 text-white/80">Welcome back! Sign in to continue.</p>
+        </div>
+
+        <!-- Login Card -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Login</h2>
+
+            <!-- Non-field errors -->
+            {% if form.non_field_errors %}
+                <div class="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Username Field -->
+                <div class="mb-5">
+                    <label for="id_username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="mt-1">
+                            {% for error in form.username.errors %}
+                                <p class="text-sm text-red-600">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="mb-6">
+                    <label for="id_password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="mt-1">
+                            {% for error in form.password.errors %}
+                                <p class="text-sm text-red-600">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition font-medium text-lg">
+                    Sign In
+                </button>
+            </form>
+
+            <!-- Register Link -->
+            <p class="mt-6 text-center text-gray-600">
+                Don't have an account?
+                <a href="{% url 'register' %}" class="text-indigo-600 hover:text-indigo-800 font-medium">Create one</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
